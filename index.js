@@ -16,29 +16,15 @@ dataSplit.forEach(item => {
   const name = namesArray.join(' ')
   
   if(numbersArray.length === 2){
-    // const data = numbersArray.map(item=> Number(item.replaceAll(',','')))
-    // population = data[0]
-    // area = data[1]
-  
-   
-    // numbersArray[1] = numbersArray[1] + '.' + numbersArray[2]
-    // numbersArray.pop()
-    // const [population, area] = numbersArray.map(item=> Number(item.replaceAll(',','')))
-
-  
-    // const [population, area] = numbersArray.map(item=> Number(item.replaceAll(',','')))
-    // area !== undefined  ? density = population/area : density = 0
-      
     const [population, area] = numbersArray.map(item => Number(item.replaceAll(',','')))
     const density = population/area
     countries.push({name, population, area, density})
   }
   
-  
 })
 
 
- countries.sort((a, b)=> b.density - a.density)
+countries.sort((a, b)=> b.density - a.density)
 
 
 countries.forEach((country) => {     
@@ -50,20 +36,15 @@ countries.forEach((country) => {
       newLine.push(country.density)
       writeStream.write(newLine.join(',')+ '\n')
     }
-   
 })
 
 writeStream.end()
 
 writeStream.on('finish', () => {
-  
-    console.log(`Total:${dataSplit.length} entries,
-${dataSplit.length - countries.length} skipped for incorrect format data,
-${countries.length} densities calculated and added to csv.`)
-
+  console.log(`Total:${dataSplit.length} entries,
+  ${dataSplit.length - countries.length} skipped for incorrect format data,
+  ${countries.length} densities calculated and added to csv.`)
 }).on('error', (err) => {
     console.log(err)
 })
 
-console.log(`
-`);
